@@ -1,9 +1,9 @@
 # Exercise 1 - 3: Learning the Basics
 
 
-[Exercise 1: P4Runtime Basics](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md)
-[Exercise 2: Yang, OpenConfig, and gNMI Basics](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md)
-[Exercise 3: Using ONOS as the control plane for Stratum](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-3.md)
+* [Exercise 1: P4Runtime Basics](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-1.md)
+* [Exercise 2: Yang, OpenConfig, and gNMI Basics](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-2.md)
+* [Exercise 3: Using ONOS as the control plane for Stratum](https://github.com/opennetworkinglab/ngsdn-tutorial/blob/advanced/EXERCISE-3.md)
 
 ### Topologia
 <img src='img\topo-v6.png'>
@@ -37,8 +37,13 @@ make mn-cli
 ### Insert static NDP entries
 ```
 mininet> h1a ip -6 neigh replace 2001:1:1::B lladdr 00:00:00:00:00:1B dev h1a-eth0
+mininet> h1a ip -6 neigh replace 2001:1:1::C lladdr 00:00:00:00:00:1C dev h1a-eth0
 
 mininet> h1b ip -6 neigh replace 2001:1:1::A lladdr 00:00:00:00:00:1A dev h1b-eth0
+mininet> h1b ip -6 neigh replace 2001:1:1::C lladdr 00:00:00:00:00:1C dev h1b-eth0
+
+mininet> h1c ip -6 neigh replace 2001:1:1::A lladdr 00:00:00:00:00:1A dev h1c-eth0
+mininet> h1c ip -6 neigh replace 2001:1:1::B lladdr 00:00:00:00:00:1B dev h1c-eth0
 
 mininet> h1a ping h1b
 ```
@@ -46,19 +51,24 @@ mininet> h1a ping h1b
 ### Insert P4Runtime table entries
 ```
 P4Runtime sh >>> te = table_entry['IngressPipeImpl.l2_exact_table'](action='IngressPipeImpl.set_egress_port')
-P4Runtime sh >>> te.match['hdr.ethernet.dst_addr'] = '00:00:00:00:00:1A'
-P4Runtime sh >>> te.action['port_num'] = '3'
-P4Runtime sh >>> te.insert()
+                 te.match['hdr.ethernet.dst_addr'] = '00:00:00:00:00:1A'
+                 te.action['port_num'] = '3'
+                 te.insert()
 
 P4Runtime sh >>> te = table_entry['IngressPipeImpl.l2_exact_table'](action='IngressPipeImpl.set_egress_port')
-P4Runtime sh >>> te.match['hdr.ethernet.dst_addr'] = '00:00:00:00:00:1B'
-P4Runtime sh >>> te.action['port_num'] = '4'
-P4Runtime sh >>> te.insert()
+                 te.match['hdr.ethernet.dst_addr'] = '00:00:00:00:00:1B'
+                 te.action['port_num'] = '4'
+                 te.insert()
+
+P4Runtime sh >>> te = table_entry['IngressPipeImpl.l2_exact_table'](action='IngressPipeImpl.set_egress_port')
+                 te.match['hdr.ethernet.dst_addr'] = '00:00:00:00:00:1C'
+                 te.action['port_num'] = '5'
+                 te.insert()
 
 P4Runtime sh >>> print(te)
 
 P4Runtime sh >>> for te in table_entry["IngressPipeImpl.l2_exact_table"].read():
-					print(te)
+    			print(te)
 ```
 
 ## Yang, OpenConfig, and gNMI Basics
@@ -288,12 +298,3 @@ Using the ONF Cloud Tutorial Portal, access the ONOS UI:
 http://127.0.0.1:8181/onos/ui
 Use the username **onos** and password **rocks**.
 
-
-
-
-
-### References
-[Systems Approach](https://www.systemsapproach.org/tutorial.html)
-[SDN System Approach](https://sdn.systemsapproach.org/)
-[NG-SDN](http://bit.ly/adv-ngsdn-tutorial-slides)
-[ONOS Project](https://wiki.onosproject.org/x/OYMg)
