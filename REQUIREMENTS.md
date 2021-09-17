@@ -36,4 +36,4 @@ This repo is structured as follows:
 * ptf/ - P4 data plane unit tests based on Packet Test Framework (PTF)
 
 **Click on the link to see the instructions:**
-* [Exercises](EXERCIsES.md)
+* [Exercises](EXERCISES.md)

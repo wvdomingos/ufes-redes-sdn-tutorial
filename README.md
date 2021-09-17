@@ -19,10 +19,10 @@ Tutorial sessions are organized around a sequence of hands-on exercises that sho
 
 **Click on the link to see the instructions:**
 * [System Requirements](REQUIREMENTS.md)
-* [Exercises](EXERCIsES.md)
+* [Exercises](EXERCISES.md)
 
 ### References
-[Systems Approach](https://www.systemsapproach.org/tutorial.html)
-[SDN System Approach](https://sdn.systemsapproach.org/)
-[NG-SDN](http://bit.ly/adv-ngsdn-tutorial-slides)
-[ONOS Project](https://wiki.onosproject.org/x/OYMg)
+* [Systems Approach](https://www.systemsapproach.org/tutorial.html)
+* [SDN System Approach](https://sdn.systemsapproach.org/)
+* [NG-SDN](http://bit.ly/adv-ngsdn-tutorial-slides)
+* [ONOS Project](https://wiki.onosproject.org/x/OYMg)

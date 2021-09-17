@@ -128,30 +128,30 @@ bash-4.4# less /proto/tutorial/enums/enums.proto
 We can also use proto_generator to build the protobuf messages for the OpenConfig models that Stratum uses:
 ```
 bash-4.4# proto_generator \    
--generate_fakeroot \    
--output_dir=/proto \    
--package_name=openconfig \   
--exclude_modules=ietf-interfaces \    
--compress_paths \    
--base_import_path= \    
--path=ietf,openconfig,hercules \    
-openconfig/interfaces/openconfig-interfaces.yang \    
-openconfig/interfaces/openconfig-if-ip.yang \    
-openconfig/lacp/openconfig-lacp.yang \    
-openconfig/platform/openconfig-platform-linecard.yang \    
-openconfig/platform/openconfig-platform-port.yang \    
-openconfig/platform/openconfig-platform-transceiver.yang \    
-openconfig/platform/openconfig-platform.yang \   
-openconfig/system/openconfig-system.yang \    
-openconfig/vlan/openconfig-vlan.yang \    
-hercules/openconfig-hercules-interfaces.yang \    
-hercules/openconfig-hercules-platform-chassis.yang \    
-hercules/openconfig-hercules-platform-linecard.yang \    
-hercules/openconfig-hercules-platform-node.yang \    
-hercules/openconfig-hercules-platform-port.yang \    
-hercules/openconfig-hercules-platform.yang \    
-hercules/openconfig-hercules-qos.yang \    
-hercules/openconfig-hercules.yang
+          -generate_fakeroot \    
+          -output_dir=/proto \    
+          -package_name=openconfig \   
+          -exclude_modules=ietf-interfaces \    
+          -compress_paths \    
+          -base_import_path= \    
+          -path=ietf,openconfig,hercules \    
+          openconfig/interfaces/openconfig-interfaces.yang \    
+          openconfig/interfaces/openconfig-if-ip.yang \    
+          openconfig/lacp/openconfig-lacp.yang \    
+          openconfig/platform/openconfig-platform-linecard.yang \    
+          openconfig/platform/openconfig-platform-port.yang \    
+          openconfig/platform/openconfig-platform-transceiver.yang \    
+          openconfig/platform/openconfig-platform.yang \   
+          openconfig/system/openconfig-system.yang \    
+          openconfig/vlan/openconfig-vlan.yang \    
+          hercules/openconfig-hercules-interfaces.yang \    
+          hercules/openconfig-hercules-platform-chassis.yang \    
+          hercules/openconfig-hercules-platform-linecard.yang \    
+          hercules/openconfig-hercules-platform-node.yang \    
+          hercules/openconfig-hercules-platform-port.yang \    
+          hercules/openconfig-hercules-platform.yang \    
+          hercules/openconfig-hercules-qos.yang \    
+          hercules/openconfig-hercules.yang
 ```
 
 YANG and Go together
@@ -180,8 +180,7 @@ $ util/gnmi-cli --grpc-addr localhost:50001 get \ /interfaces/interface[name=lea
 Next, we will subscribe to the ingress unicast packet counters for the interface on leaf1 attached to h1a (port 3):
 ```
 $ util/gnmi-cli --grpc-addr localhost:50001 \
---interval 1000 sub-sample \     
-/interfaces/interface[name=leaf1-eth3]/state/counters/in-unicast-pkts
+--interval 1000 sub-sample /interfaces/interface[name=leaf1-eth3]/state/counters/in-unicast-pkts
 ```
 
 ### Tests
@@ -194,7 +193,7 @@ mininet> h1a ping h1b
 Finally, we will monitor link events using gNMI's on-change subscriptions.
 Start a subscription for the operational status of the first switch's first port:
 ```
-$ util/gnmi-cli --grpc-addr localhost:50001 sub-onchange \    /interfaces/interface[name=leaf1-eth3]/state/oper-status
+$ util/gnmi-cli --grpc-addr localhost:50001 sub-onchange /interfaces/interface[name=leaf1-eth3]/state/oper-status
 ```
 
 You should immediately see a response which indicates that port 1 is UP.
